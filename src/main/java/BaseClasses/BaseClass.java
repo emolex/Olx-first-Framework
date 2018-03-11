@@ -157,6 +157,7 @@ public class BaseClass {
     public void LoginWithWrongEmail() {
         login.loginSucces(generateRandomEmail(), UserData.pass);
         login.checkNotify(notify_login, "nieprawidłowy login lub hasło");
+
     }
 
 
