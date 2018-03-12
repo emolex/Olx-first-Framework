@@ -10,7 +10,6 @@ import static BaseClasses.RegisterTests.DataElementsForRegister.*;
 import static BaseClasses.LoginTests.DataElementsForLogin.*;
 import BaseClasses.jsonData.UserData;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import org.testng.annotations.*;
@@ -18,7 +17,7 @@ import org.testng.annotations.*;
 public class BaseClass {
 
     public WebDriver driver;
-    protected TestMethods tm;
+    protected TestMethods testMethods;
     public RegistryPage register;
     public BaseMethods baseMethods;
     public LoginPage login;
@@ -30,12 +29,8 @@ public class BaseClass {
    @BeforeTest
     public void setUp() {
        JsonParser.parseJson();
-       tm = new TestMethods(driver);
-       driver = tm.browserPicker();
-   }
-
-   @BeforeClass
-   public void test () {
+       testMethods = new TestMethods(driver);
+       driver = testMethods.browserPicker();
        register = new RegistryPage(driver);
        login = new LoginPage(driver);
        baseMethods = new BaseMethods();
@@ -170,7 +165,7 @@ public class BaseClass {
 
     @AfterTest
     public void tearDown() {
-       tm.sleep(2000);
+       testMethods.sleep(2000);
        driver.close();
 
    }

@@ -11,15 +11,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
-import java.util.Random;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class TestMethods {
     private WebDriver driver;
-
-//    private final static char[] chars = "abcdefghijklmnoprstqwuxyz".toCharArray();
-
 
     public TestMethods(WebDriver driver) {
         this.driver = driver;
@@ -38,12 +34,6 @@ public class TestMethods {
         return driver;
     }
 
-    public void openUrl() {
-        driver.get("https://www.olx.pl/");
-    }
-
-
-
     public WebElement waitForIt(WebElement webElement) {
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
                 .withTimeout(30, SECONDS)
@@ -60,20 +50,6 @@ public class TestMethods {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-
-
-
-    public WebDriver browserPicker(String browser) {
-        switch (browser) {
-            case "firefox":
-                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/geckodriver");
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                return driver;
-        }
-        return driver;
     }
 
 }
