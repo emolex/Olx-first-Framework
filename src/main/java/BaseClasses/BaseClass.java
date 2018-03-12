@@ -35,7 +35,6 @@ public class BaseClass {
        System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/geckodriver");
        driver = new FirefoxDriver();
        driver.manage().window().maximize();
-
    }
 
    @BeforeClass
@@ -152,19 +151,24 @@ public class BaseClass {
         login.checkNotify(notify_login, "To pole jest wymagane");
     }
 
-
     @Test
     public void LoginWithWrongEmail() {
         login.loginSucces(generateRandomEmail(), UserData.pass);
         login.checkNotify(notify_login, "nieprawidłowy login lub hasło");
-
     }
-
 
     @Test
     public void LoginWithWrongPass() {
         login.loginSucces(UserData.email,generateRandomString(8));
         login.checkNotify(notify_login, "nieprawidłowy login lub hasło");
+    }
+
+    @Test
+    public void RegisterAlreadyExistedUser() {
+        register.registryUniversalMethod(UserData.email,generateRandomString(6)+"A!");
+        register.acceptTerms();
+        register.submitButton();
+        register.checkNotify(notify, "Teraz musisz aktywować swoje konto!");
     }
 
     @AfterTest
