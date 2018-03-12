@@ -1,9 +1,11 @@
 package BaseClasses;
 
+import BaseClasses.jsonData.UserData;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -16,13 +18,31 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 public class TestMethods {
     private WebDriver driver;
 
-    private final static char[] chars = "abcdefghijklmnoprstqwuxyz".toCharArray();
+//    private final static char[] chars = "abcdefghijklmnoprstqwuxyz".toCharArray();
 
 
     public TestMethods(WebDriver driver) {
         this.driver = driver;
 
     }
+
+    public WebDriver browserPicker() {
+        if (UserData.browser.contains("firefox")) {
+            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/geckodriver");
+            driver = new FirefoxDriver();
+        }
+        else{
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
+            driver = new ChromeDriver();}
+        driver.manage().window().maximize();
+        return driver;
+    }
+
+    public void openUrl() {
+        driver.get("https://www.olx.pl/");
+    }
+
+
 
     public WebElement waitForIt(WebElement webElement) {
         Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
@@ -33,25 +53,6 @@ public class TestMethods {
         return element;
     }
 
-    public static String generateRandomString(int length) {
-        Random r = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            sb.append(chars[r.nextInt(25)]);
-        }
-        return sb.toString();
-    }
-
-
-    public static String generateRandomEmail() {
-        Random r = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < r.nextInt(7) + 5; i++) {
-            sb.append(chars[r.nextInt(25)]);
-        }
-        sb.append("@gmail.com");
-        return sb.toString();
-    }
 
     public void sleep(int time){
         try {
@@ -60,22 +61,6 @@ public class TestMethods {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

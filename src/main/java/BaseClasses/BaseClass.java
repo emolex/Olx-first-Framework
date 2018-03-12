@@ -4,7 +4,8 @@ package BaseClasses;
 import BaseClasses.LoginTests.LoginPage;
 import BaseClasses.RegisterTests.RegistryPage;
 import BaseClasses.jsonData.JsonParser;
-import static BaseClasses.TestMethods.*;
+
+import static BaseClasses.BaseMethods.*;
 import static BaseClasses.RegisterTests.DataElementsForRegister.*;
 import static BaseClasses.LoginTests.DataElementsForLogin.*;
 import BaseClasses.jsonData.UserData;
@@ -19,34 +20,29 @@ public class BaseClass {
     public WebDriver driver;
     protected TestMethods tm;
     public RegistryPage register;
+    public BaseMethods baseMethods;
     public LoginPage login;
 
     BaseClass() {
         PageFactory.initElements(driver, this);
     }
 
-
    @BeforeTest
     public void setUp() {
-//       tm = new TestMethods(driver);
-//       register = new RegistryPage(driver);
-//       login = new LoginPage(driver);
        JsonParser.parseJson();
-       System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/geckodriver");
-       driver = new FirefoxDriver();
-       driver.manage().window().maximize();
+       tm = new TestMethods(driver);
+       driver = tm.browserPicker();
    }
 
    @BeforeClass
    public void test () {
-       tm = new TestMethods(driver);
        register = new RegistryPage(driver);
        login = new LoginPage(driver);
+       baseMethods = new BaseMethods();
    }
 
    @BeforeMethod
    public void getUrl(){
-       tm = new TestMethods(driver);
        driver.get("https://www.olx.pl/");
    }
 
@@ -57,6 +53,7 @@ public class BaseClass {
       register.submitButton();
        register.checkNotify(notify, "Teraz musisz aktywować swoje konto!");
    }
+
     @Test
     public void RegisterWithoutEmail() {
         register.registryUniversalMethod(generateRandomString(0),generateRandomString(8));
