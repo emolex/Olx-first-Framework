@@ -41,6 +41,7 @@ public class TestMethods {
                 .ignoring(NoSuchElementException.class, ElementNotInteractableException.class);
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(webElement));
         return element;
+
     }
 
 
@@ -51,4 +52,6 @@ public class TestMethods {
             e.printStackTrace();
         }
     }
+
+    /**jakis komentarz*/
 }
