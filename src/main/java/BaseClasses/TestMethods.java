@@ -52,6 +52,9 @@ public class TestMethods {
         }
     }
 
+
+
+
     public void openNewTab() {
         ((JavascriptExecutor) driver).executeScript("window.open();");        //otwiera nowa karte przez js
         ArrayList tabs = new ArrayList(driver.getWindowHandles());              //oblicza ilosc aktywnych kart
