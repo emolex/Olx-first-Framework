@@ -28,4 +28,9 @@ public class LoginPage extends DataElementsForLogin{
         tm = new TestMethods(driver);
         PageFactory.initElements(driver, this);
     }
+
+    public void LogOut () {
+        tm.waitForIt(userBox).click();
+        tm.waitForIt(logOut).click();
+    }
 }

@@ -36,6 +36,12 @@ public class DataElementsForLogin {
     @FindBy(xpath = "//*[@class = 'xxx-large lheight24' or @class='error']")
     public static WebElement notify_login;
 
+    @FindBy(xpath = "//*[@class='user-box__photo']")
+    public static WebElement userBox;
+
+    @FindBy (id = "login-box-logout")
+    protected WebElement logOut;
+
 
 
 

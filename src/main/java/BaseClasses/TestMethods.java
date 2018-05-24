@@ -1,16 +1,15 @@
 package BaseClasses;
 
 import BaseClasses.jsonData.UserData;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 
+
+import java.util.ArrayList;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -53,5 +52,16 @@ public class TestMethods {
         }
     }
 
-    /**jakis komentarz*/
+    public void openNewTab() {
+        ((JavascriptExecutor) driver).executeScript("window.open();");        //otwiera nowa karte przez js
+        ArrayList tabs = new ArrayList(driver.getWindowHandles());              //oblicza ilosc aktywnych kart
+        driver.switchTo().window((String) tabs.get(1));                          //przechodzi do drugiej karty
+    }
+
+    /**Scroluje widok do podanego WebElementu*/
+    public void ScroolToTheSomePoint(WebElement element) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+
+    }
 }
